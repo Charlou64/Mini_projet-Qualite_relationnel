@@ -4,10 +4,10 @@ import java.util.Date;
 
 public class Commande {
     private int id, idClient;
-    private Date date;
+    private String date;
     private float total;
 
-    public Commande(int _idClient, Date _date, float _total) {
+    public Commande(int _idClient, String _date, float _total) {
         idClient = _idClient;
         date = _date;
         total = _total;
@@ -29,11 +29,11 @@ public class Commande {
         this.idClient = idClient;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

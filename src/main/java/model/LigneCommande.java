@@ -2,6 +2,7 @@ package model;
 
 public class LigneCommande {
     private int idCommande, idProduit, quantite;
+    private float prixUnitaire;
 
     public LigneCommande(int _idCommande, int _idProduit, int _quantite) {
         idCommande = _idCommande;
@@ -31,5 +32,13 @@ public class LigneCommande {
 
     public void setQuantite(int quantite) {
         this.quantite = quantite;
+    }
+
+    public float getPrixUnitaire() {
+        return prixUnitaire;
+    }
+
+    public void setPrixUnitaire(float prixUnitaire) {
+        this.prixUnitaire = prixUnitaire;
     }
 }

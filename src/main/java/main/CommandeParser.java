@@ -6,7 +6,11 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
 
+import dao.ProduitDAO;
+import model.Produit;
+
 import java.io.File;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CommandeParser {
@@ -20,11 +24,23 @@ public class CommandeParser {
         	Element racine = document.getRootElement();
         	List<Element> liste_produits = racine.getChildren();
         	
-        	for (Element produit : liste_produits) {
-        	    String nom = produit.getChildText("nom");        
-        	    String prixS = produit.getChildText("prix");     
-        	    String qteS = produit.getChildText("quantité");  
-        	    System.out.println("Produit : " + nom + " | Prix fournisseur : " + prixS + "€");
+        	ProduitDAO pDao = new ProduitDAO();
+        	
+        	for (Element produitXml : liste_produits) {
+        	    String nom = produitXml.getChildText("nom");
+        	    float prixFournisseur = Float.parseFloat(produitXml.getChildText("prix"));
+        	    int stock = Integer.parseInt(produitXml.getChildText("quantité"));
+
+        	    float prixVente = prixFournisseur * 2;
+
+        	    Produit p = new Produit(nom, prixVente, stock);
+        	    
+        	    try {
+        	        pDao.insert(p); // La méthode que tu dois ajouter dans ProduitDAO
+        	        System.out.println("Produit " + nom + " inséré avec succès (Prix doublé: " + prixVente + ")");
+        	    } catch (SQLException e) {
+        	        System.err.println("Erreur insertion : " + e.getMessage());
+        	    }
         	}
         	
         	//Affichage sous la forme XML

@@ -1,5 +1,6 @@
 package dao;
 
+import model.Client;
 import model.Produit;
 import java.sql.*;
 
@@ -36,5 +37,24 @@ public class ProduitDAO {
             ps.setInt(2, idProduit);
             ps.executeUpdate();
         }
+    }
+    
+    /**
+     * @param client
+     * @return l'id du client
+     * @throws SQLException
+     */
+    public int insert(Produit produit) throws SQLException {
+        String query = "INSERT INTO Produits (nom, prix, quantite_stock) VALUES (?, ?, ?)";
+        try (PreparedStatement ps = DBConnection.getConnection().prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, produit.getNom());
+            ps.setFloat(2, produit.getPrix());
+            ps.setInt(3, produit.getStock());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) return rs.getInt(1);
+        }
+        return -1;
     }
 }

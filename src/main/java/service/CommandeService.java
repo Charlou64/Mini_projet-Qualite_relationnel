@@ -6,7 +6,11 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
 import org.jdom2.input.sax.XMLReaders;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 
 public class CommandeService {
@@ -78,6 +82,26 @@ public class CommandeService {
 
         } catch (Exception e) {
             System.err.println("Erreur technique : " + e.getMessage());
+        }
+    }
+
+    /**
+     * @param filename
+     */
+    public void exporterCommandes(String filename) {
+        try {
+            Element root = new Element("archive-commandes");
+            Document doc = new Document(root);
+
+            List<Element> commandes = commandeDAO.getCommandesPourExport();
+            root.addContent(commandes);
+
+            XMLOutputter xmlOutput = new XMLOutputter(Format.getPrettyFormat());
+            xmlOutput.output(doc, new FileWriter(filename));
+
+            System.out.println("Export réussi dans le fichier : " + filename);
+        } catch (Exception e) {
+            System.err.println("Erreur lors de l'export : " + e.getMessage());
         }
     }
 

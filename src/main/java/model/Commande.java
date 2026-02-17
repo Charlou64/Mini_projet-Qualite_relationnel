@@ -7,8 +7,7 @@ public class Commande {
     private Date date;
     private float total;
 
-    public Commande(int _id, int _idClient, Date _date, float _total) {
-        id = _id;
+    public Commande(int _idClient, Date _date, float _total) {
         idClient = _idClient;
         date = _date;
         total = _total;

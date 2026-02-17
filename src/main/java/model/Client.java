@@ -4,8 +4,7 @@ public class Client {
     private int id;
     private String nom, email, ville;
 
-    public Client(int _id, String _nom, String _email, String _ville) {
-        id = _id;
+    public Client(String _nom, String _email, String _ville) {
         nom = _nom;
         email = _email;
         ville = _ville;

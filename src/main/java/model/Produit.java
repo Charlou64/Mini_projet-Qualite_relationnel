@@ -6,8 +6,7 @@ public class Produit {
     private float prix;
     private int stock;
 
-    public Produit(int _id, String _nom, float _prix, int _stock) {
-        id = _id;
+    public Produit(String _nom, float _prix, int _stock) {
         nom = _nom;
         prix = _prix;
         stock = _stock;

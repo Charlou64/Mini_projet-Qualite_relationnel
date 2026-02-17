@@ -11,7 +11,7 @@ public class App
     public static void main( String[] args )
     {
         SAXBuilder builder = new SAXBuilder(XMLReaders.DTDVALIDATING);
-git
+
         try {
             Document doc = builder.build(new File("Commandes.xml"));
             System.out.println("Le fichier commande.xml est valide !");

@@ -4,10 +4,11 @@ public class LigneCommande {
     private int idCommande, idProduit, quantite;
     private float prixUnitaire;
 
-    public LigneCommande(int _idCommande, int _idProduit, int _quantite) {
+    public LigneCommande(int _idCommande, int _idProduit, int _quantite, float _prixUnitaire) {
         idCommande = _idCommande;
         idProduit = _idProduit;
         quantite = _quantite;
+        prixUnitaire = _prixUnitaire;
     }
 
     public int getIdCommande() {

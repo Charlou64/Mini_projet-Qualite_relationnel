@@ -60,7 +60,7 @@ public class CommandeDAO {
     public List<Element> getCommandesPourExport() throws SQLException {
         List<Element> elementsCommandes = new ArrayList<>();
 
-        String sql = "SELECT c.*, cl.nom_client FROM Commandes c JOIN Clients cl ON c.id_client = cl.id_client";
+        String sql = "SELECT c.*, cl.nom_client, cl.email, cl.ville FROM Commandes c JOIN Clients cl ON c.id_client = cl.id_client";
 
         try (Statement st = DBConnection.getConnection().createStatement();
              ResultSet rs = st.executeQuery(sql)) {
@@ -73,7 +73,11 @@ public class CommandeDAO {
                 cmdElem.setAttribute("id", "C" + idCmd);
 
                 cmdElem.addContent(new Element("nom-client").setText(rs.getString("nom_client")));
+                cmdElem.addContent(new Element("email").setText(rs.getString("email")));
+                cmdElem.addContent(new Element("ville").setText(rs.getString("ville")));
                 cmdElem.addContent(new Element("date").setText(rs.getString("date_commande")));
+
+                cmdElem.addContent(new Element("total").setText(String.valueOf(rs.getDouble("total_commande"))));
 
                 // les lignes
                 List<Element> lignes = getLignesPourExport(idCmd);
@@ -82,7 +86,6 @@ public class CommandeDAO {
                 produitsElem.addContent(lignes);
 
                 cmdElem.addContent(produitsElem);
-                cmdElem.addContent(new Element("total").setText(String.valueOf(rs.getDouble("total_commande"))));
 
                 elementsCommandes.add(cmdElem);
             }

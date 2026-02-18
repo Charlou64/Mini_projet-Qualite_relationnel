@@ -96,7 +96,7 @@ public class CommandeService {
      */
     public void exporterCommandes(String filename) {
         try {
-            Element root = new Element("archive-commandes");
+            Element root = new Element("commandes");
             Document doc = new Document(root);
 
             List<Element> commandes = commandeDAO.getCommandesPourExport();

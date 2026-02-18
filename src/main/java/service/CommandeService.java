@@ -52,7 +52,10 @@ public class CommandeService {
                 Produit p = produitDAO.findByName(nom);
 
                 if (p == null || qteDemandee <= 0 || qteDemandee > p.getStock()) {
-                    System.err.println("ERREUR : Produit " + nom + " invalide ou stock insuffisant.");
+                    if (p == null)
+                        System.err.println("ERREUR : Produit " + nom + " invalide.");
+                    else
+                        System.err.println("ERREUR : Produit " + nom + " stock insuffisant.");
                     commandeValide = false;
                     break; // stop
                 }
@@ -105,6 +108,9 @@ public class CommandeService {
         }
     }
 
+    /**
+     * @return L'instance du Singleton
+     */
     public static CommandeService getInstance() {
         if (instance == null)
             instance = new CommandeService();

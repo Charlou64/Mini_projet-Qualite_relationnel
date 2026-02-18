@@ -1,8 +1,5 @@
 package main;
 
-import org.jdom2.Document;
-import org.jdom2.input.SAXBuilder;
-import org.jdom2.input.sax.XMLReaders;
 import service.CommandeService;
 
 import java.io.File;

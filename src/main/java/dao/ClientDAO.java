@@ -5,6 +5,19 @@ import java.sql.*;
 
 public class ClientDAO {
 
+    private static ClientDAO instance;
+
+    private ClientDAO() {}
+
+    /**
+     * @return Le Singleton
+     */
+    public static ClientDAO getInstance() {
+        if (instance == null)
+            instance = new ClientDAO();
+        return instance;
+    }
+
     /**
      * @param email
      * @return le client qui correspond a l'email
@@ -42,4 +55,6 @@ public class ClientDAO {
         }
         return -1;
     }
+
+
 }

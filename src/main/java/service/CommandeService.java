@@ -16,9 +16,9 @@ import java.util.List;
 public class CommandeService {
     private static CommandeService instance;
 
-    private ClientDAO clientDAO = new ClientDAO();
-    private ProduitDAO produitDAO = new ProduitDAO();
-    private CommandeDAO commandeDAO = new CommandeDAO();
+    private ClientDAO clientDAO = ClientDAO.getInstance();
+    private ProduitDAO produitDAO = ProduitDAO.getInstance();
+    private CommandeDAO commandeDAO = CommandeDAO.getInstance();
 
     private CommandeService() {}
 
@@ -31,11 +31,14 @@ public class CommandeService {
 
             // client
             Element clientElem = root.getChild("client");
-            String email = clientElem.getChildText("email").trim();
+            String email = clientElem.getChildText("email").replaceAll("\\s+", "");
+            String nomClient = clientElem.getChildText("nom-client").trim();
+            String villeClient = clientElem.getChildText("ville").trim();
+
             Client client = clientDAO.findByEmail(email);
 
             if (client == null) {
-                client = new Client(clientElem.getChildText("nom-client"), email, clientElem.getChildText("ville"));
+                client = new Client(nomClient, email, villeClient);
                 int id = clientDAO.insert(client);
                 client.setId(id);
             }

@@ -10,6 +10,19 @@ import java.util.List;
 
 public class CommandeDAO {
 
+    private static CommandeDAO instance;
+
+    private CommandeDAO() {}
+
+    /**
+     * @return Le Singleton
+     */
+    public static CommandeDAO getInstance() {
+        if (instance == null)
+            instance = new CommandeDAO();
+        return instance;
+    }
+    
     /**
      * @param cmd
      * @return L'id de la commande

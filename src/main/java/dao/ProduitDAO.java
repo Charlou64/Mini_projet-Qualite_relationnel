@@ -6,6 +6,19 @@ import java.sql.*;
 
 public class ProduitDAO {
 
+    private static ProduitDAO instance;
+
+    private ProduitDAO() {}
+
+    /**
+     * @return Le Singleton
+     */
+    public static ProduitDAO getInstance() {
+        if (instance == null)
+            instance = new ProduitDAO();
+        return instance;
+    }
+
     /**
      * @param nom
      * @return le produit ayant le bon nom
@@ -40,7 +53,7 @@ public class ProduitDAO {
     }
     
     /**
-     * @param client
+     * @param produit
      * @return l'id du client
      * @throws SQLException
      */

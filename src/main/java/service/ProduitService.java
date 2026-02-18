@@ -29,7 +29,8 @@ public class ProduitService {
     }
 
     /**
-     * @param cheminFichier
+     * Importer les produits dans la base
+     * @param cheminFichier chemin vers le fichier xml
      */
     public void importerProduitsFournisseur(String cheminFichier) {
         try {
@@ -39,7 +40,7 @@ public class ProduitService {
             Document document = saxbuilder.build(new File(cheminFichier));
             Element racine = document.getRootElement();
 
-            // On récupère tous les éléments <produit>
+            // les produits
             List<Element> liste_produits = racine.getChildren("produit");
 
             for (Element produitXml : liste_produits) {
@@ -47,13 +48,11 @@ public class ProduitService {
                 float prixFournisseur = Float.parseFloat(produitXml.getChildText("prix"));
                 int stock = Integer.parseInt(produitXml.getChildText("quantité"));
 
-                // Logique métier : On double le prix pour la revente
                 float prixVente = prixFournisseur * 2;
 
                 Produit p = new Produit(nom, prixVente, stock);
 
                 try {
-                    // On utilise le DAO déjà présent dans le Singleton
                     produitDAO.insert(p);
                     System.out.println("Produit [" + nom + "] inséré (Prix vente: " + prixVente + ")");
                 } catch (SQLException e) {
@@ -70,6 +69,7 @@ public class ProduitService {
 
     /**
      * Méthode utilitaire pour afficher le contenu d'un XML en console (Pretty Print)
+     * @param cheminFichier chemin vers le fichier xml
      */
     public void afficherContenuXML(String cheminFichier) {
         try {

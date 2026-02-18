@@ -20,7 +20,8 @@ public class ProduitDAO {
     }
 
     /**
-     * @param nom
+     * Récupérer un produit par son nom
+     * @param nom le nom du produit
      * @return le produit ayant le bon nom
      * @throws SQLException
      */
@@ -39,8 +40,9 @@ public class ProduitDAO {
     }
 
     /**
-     * @param idProduit
-     * @param quantiteVendue
+     * Actualiser les stock d'un produit
+     * @param idProduit l'id du produit
+     * @param quantiteVendue la quantité vendue
      * @throws SQLException
      */
     public void updateStock(int idProduit, int quantiteVendue) throws SQLException {
@@ -53,7 +55,8 @@ public class ProduitDAO {
     }
     
     /**
-     * @param produit
+     * Insérer un nouveau produit
+     * @param produit le produit a insérer
      * @return l'id du client
      * @throws SQLException
      */

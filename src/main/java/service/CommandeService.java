@@ -23,6 +23,10 @@ public class CommandeService {
 
     private CommandeService() {}
 
+    /**
+     * Insère dans la base les commandes d'un xml.
+     * @param xmlPath le chemin vers le xml
+     */
     public void traiterCommande(String xmlPath) {
         try {
             // dtd
@@ -93,7 +97,8 @@ public class CommandeService {
     }
 
     /**
-     * @param filename
+     * Export les commandes de la base dans un xml
+     * @param filename le nom du fichier xml
      */
     public void exporterCommandes(String filename) {
         try {

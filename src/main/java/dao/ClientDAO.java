@@ -19,7 +19,8 @@ public class ClientDAO {
     }
 
     /**
-     * @param email
+     * Récupérer un client a partir de son email unique
+     * @param email un mail
      * @return le client qui correspond a l'email
      * @throws SQLException
      */
@@ -38,7 +39,8 @@ public class ClientDAO {
     }
 
     /**
-     * @param client
+     * Insérer un nouveau client
+     * @param client le client a insérer
      * @return l'id du client
      * @throws SQLException
      */

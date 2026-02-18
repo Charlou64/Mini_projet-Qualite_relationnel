@@ -24,7 +24,8 @@ public class CommandeDAO {
     }
     
     /**
-     * @param cmd
+     * Insère une nouvelle commande
+     * @param cmd la commande a insérer
      * @return L'id de la commande
      * @throws SQLException
      */
@@ -42,6 +43,11 @@ public class CommandeDAO {
         return -1;
     }
 
+    /**
+     * Insérer une ligne (lie 1 commande a 1 produit)
+     * @param ligne la ligne a insérer
+     * @throws SQLException
+     */
     public void insertLigne(LigneCommande ligne) throws SQLException {
         String query = "INSERT INTO Lignes_Commande (id_commande, id_produit, quantite_commandee, prix_unitaire_facture) VALUES (?, ?, ?, ?)";
         try (PreparedStatement ps = DBConnection.getConnection().prepareStatement(query)) {
@@ -54,6 +60,7 @@ public class CommandeDAO {
     }
 
     /**
+     * Récupérer la listes des éléments correspondant aux commandes de la base
      * @return Une liste les commandes (pour export depuis la base)
      * @throws SQLException
      */
@@ -94,7 +101,8 @@ public class CommandeDAO {
     }
 
     /**
-     * @param idCommande
+     * Récupérer la liste des éléments correspondant aux lignes liant les commandes aux produit dans la base.
+     * @param idCommande l'id de la commande
      * @return La listes des produits (pour l'export depuis la base)
      * @throws SQLException
      */

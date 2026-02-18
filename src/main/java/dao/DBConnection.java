@@ -12,6 +12,11 @@ public class DBConnection {
 
     private DBConnection() {}
 
+    /**
+     * Récupérer la connection a la base de donnée
+     * @return La connection a la base
+     * @throws SQLException
+     */
     public static Connection getConnection() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

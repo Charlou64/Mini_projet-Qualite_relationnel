@@ -82,7 +82,7 @@ public class CommandeDAO {
                 // les lignes
                 List<Element> lignes = getLignesPourExport(idCmd);
                 Element produitsElem = new Element("produits");
-                produitsElem.setAttribute("nb-produit", String.valueOf(lignes.size()));
+                cmdElem.setAttribute("nb-produit", String.valueOf(lignes.size()));
                 produitsElem.addContent(lignes);
 
                 cmdElem.addContent(produitsElem);

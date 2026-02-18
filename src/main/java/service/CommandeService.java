@@ -129,7 +129,7 @@ public class CommandeService {
             for (Element cmd : listeCommandes) {
                 String id = cmd.getAttributeValue("id");
                 String date = cmd.getChildText("date");
-                String clientNom = cmd.getChild("client").getChildText("nom");
+                String clientNom = cmd.getChildText("nom-client");
                 String total = cmd.getChildText("total");
 
                 System.out.println("" + Color.BLUE + Color.BOLD + "Commande #" + id + Color.RESET +

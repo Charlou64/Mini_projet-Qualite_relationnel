@@ -1,6 +1,7 @@
 package service;
 
 import dao.*;
+import main.Color;
 import model.*;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -108,6 +109,44 @@ public class CommandeService {
             System.out.println("Export réussi dans le fichier : " + filename);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'export : " + e.getMessage());
+        }
+    }
+
+    /**
+     * Affiche toutes les commandes présentes en base de données avec leurs détails.
+     */
+    public void afficherCommandesBDD() {
+        try {
+            System.out.println("\n" + Color.CYAN + Color.BOLD + "--- LISTE DES COMMANDES EN BASE ---" + Color.RESET);
+
+            List<Element> listeCommandes = commandeDAO.getCommandesPourExport();
+
+            if (listeCommandes.isEmpty()) {
+                System.out.println(Color.YELLOW + "Aucune commande trouvée en base de données." + Color.RESET);
+                return;
+            }
+
+            for (Element cmd : listeCommandes) {
+                String id = cmd.getAttributeValue("id");
+                String date = cmd.getChildText("date");
+                String clientNom = cmd.getChild("client").getChildText("nom");
+                String total = cmd.getChildText("total");
+
+                System.out.println("" + Color.BLUE + Color.BOLD + "Commande #" + id + Color.RESET +
+                        " du " + date + " | Client: " + Color.YELLOW + clientNom + Color.RESET +
+                        " | Total: " + Color.GREEN + total + "€" + Color.RESET);
+
+                // Les produits de cette commande
+                List<Element> produits = cmd.getChild("produits").getChildren("produit");
+                for (Element p : produits) {
+                    System.out.println("   -> " + p.getChildText("nom") +
+                            " (Qté: " + p.getChildText("quantité") +
+                            ", Prix unit: " + p.getChildText("prix") + "€)");
+                }
+                System.out.println("------------------------------------");
+            }
+        } catch (Exception e) {
+            System.err.println(Color.RED + "Erreur lors de l'affichage des commandes : " + e.getMessage() + Color.RESET);
         }
     }
 
